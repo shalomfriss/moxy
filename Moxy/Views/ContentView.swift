@@ -10,15 +10,21 @@ import SwiftUI
 import AppKit
 
 struct ContentView: View {
+    var proxyStarted:Bool = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Make\nEpic\nThings")
-                .font(Font.system(size: 34.0))
+            
+            Button(action: {
+                print(proxyStarted ? "Stopped" : "Started")
+                //proxyStarted = !proxyStarted
+            })
+            {
+                Text("Start Charles Proxy")
+                .font(.caption)
                 .fontWeight(.semibold)
-                .multilineTextAlignment(.leading)
-                .padding(.horizontal, 16.0)
-                .padding(.vertical, 12.0)
-                .frame(width: 360.0, height: 320.0, alignment: .topLeading)
+            }
+            
             Button(action: {
                 NSApplication.shared.terminate(self)
             })
@@ -33,6 +39,7 @@ struct ContentView: View {
         .padding(0)
         .frame(width: 360.0, height: 360.0, alignment: .top)
     }
+    
 }
 
 

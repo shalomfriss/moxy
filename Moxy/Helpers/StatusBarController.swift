@@ -29,6 +29,7 @@ class StatusBarController {
             statusBarButton.target = self
         }
         
+        setupMenus()
         eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown], handler: mouseEventHandler)
     }
     
@@ -58,4 +59,41 @@ class StatusBarController {
             hidePopover(event!)
         }
     }
+    
+    func setupMenus() {
+        let menu = NSMenu()
+
+        let one = NSMenuItem(title: "Charles", action: #selector(didTapOne) , keyEquivalent: "1")
+        menu.addItem(one)
+
+        let two = NSMenuItem(title: "MITMProxy", action: #selector(didTapTwo) , keyEquivalent: "2")
+        menu.addItem(two)
+        
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+        
+        one.isEnabled = true
+        two.isEnabled = true
+        statusItem.menu = menu
+    }
+    
+    @objc func didTapOne() {
+        changeStatusBarButton(number: 1)
+    }
+
+    @objc func didTapTwo() {
+        changeStatusBarButton(number: 2)
+    }
+
+    @objc func didTapThree() {
+        changeStatusBarButton(number: 3)
+    }
+    
+    private func changeStatusBarButton(number: Int) {
+        print(number)
+//        if let button = statusItem.button {
+//            button.image = NSImage(systemSymbolName: "\(number).circle", accessibilityDescription: number.description)
+//        }
+    }
+    
 }
